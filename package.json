@@ -10,10 +10,12 @@
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^4.21.12",
+		"@prisma/client": "^4.16.1",
 		"@radix-ui/react-slot": "^1.0.2",
 		"@types/node": "20.3.2",
 		"@types/react": "18.2.14",
 		"@types/react-dom": "18.2.6",
+		"@vercel/node": "^2.15.3",
 		"autoprefixer": "10.4.14",
 		"class-variance-authority": "^0.6.1",
 		"clsx": "^1.2.1",
@@ -28,5 +30,8 @@
 		"tailwindcss": "3.3.2",
 		"tailwindcss-animate": "^1.0.6",
 		"typescript": "5.1.6"
+	},
+	"devDependencies": {
+		"prisma": "^4.16.1"
 	}
 }
