@@ -5,9 +5,7 @@ export default function handler(
 	request: VercelRequest,
 	response: VercelResponse
 ) {
-	const event = request.body.evt as WebhookEvent;
-
-	console.log(event);
+	console.log(request);
 
 	response.status(200).json({
 		body: request.body,
