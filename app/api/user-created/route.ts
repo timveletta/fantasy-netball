@@ -1,9 +1,9 @@
 import { UserWebhookEvent } from '@clerk/nextjs/dist/types/server';
 import prisma from '@/lib/prisma';
+import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
 	const { type, data }: UserWebhookEvent = await request.json();
-
 	if (type === 'user.created' && data.object === 'user') {
 		const { id } = data;
 
@@ -14,5 +14,5 @@ export async function POST(request: Request) {
 		});
 	}
 
-	return null;
+	return NextResponse.json({ ok: true });
 }
