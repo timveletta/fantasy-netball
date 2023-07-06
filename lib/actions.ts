@@ -14,6 +14,14 @@ export async function addTeamToUser(teamName: string, userId: string) {
 	return team;
 }
 
+export async function getTeamsByUserId(userId: string) {
+	const teams = await prisma.team.findMany({
+		where: { userId },
+	});
+
+	return teams;
+}
+
 export async function getUserByClerkId(clerkId: string) {
 	const user = await prisma.user.findUnique({
 		where: { clerkId },
