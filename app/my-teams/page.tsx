@@ -8,7 +8,7 @@ export default async function Page() {
 	const teams = await getTeamsByUserId(user?.id!);
 
 	return (
-		<div className="container py-8 flex space-x-4 flex-wrap">
+		<div className="container py-8 flex flex-wrap">
 			{teams.map((team) => (
 				<TeamTile key={team.id} {...team} />
 			))}
