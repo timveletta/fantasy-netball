@@ -1,3 +1,9 @@
+import TeamTile from '@/components/team-tile';
+
 export default function Page() {
-	<div className="container">My Teams</div>;
+	return (
+		<div className="container py-8">
+			<TeamTile isEmpty />
+		</div>
+	);
 }

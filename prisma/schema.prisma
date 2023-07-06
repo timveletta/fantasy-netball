@@ -13,19 +13,16 @@ datasource db {
 }
 
 model User {
-  id    String     @id @default(uuid())
-  clerkId String
-  teams Team[]
+  id      String @id @default(uuid())
+  clerkId String @unique
+  teams   Team[]
 }
 
 model Team {
-  id      String     @id @default(uuid())
-  name    String?
-  userId  String
-  user    User      @relation(fields: [userId], references: [id])
+  id     String  @id @default(uuid())
+  name   String?
+  userId String
+  user   User    @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
-
-
-

@@ -29,7 +29,9 @@ export function MainNav({
 	return (
 		<nav className={cn('py-4 border-b border-gray-300', className)} {...props}>
 			<div className="flex  justify-between container">
-				<div>Fantasy Netball</div>
+				<div>
+					<Link href="/">Fantasy Netball</Link>
+				</div>
 				<div className="flex space-x-4 lg:space-x-6">
 					{isLoggedIn && <NavLink href="/my-teams">My Teams</NavLink>}
 					{!isLoggedIn && (
