@@ -15,7 +15,7 @@ export async function addTeamToUser(teamName: string, userId: string) {
 }
 
 export async function getTeamsByUserId(userId: string) {
-	const teams = await prisma.team.findMany({
+	const teams = await prisma.userTeam.findMany({
 		where: { userId },
 	});
 

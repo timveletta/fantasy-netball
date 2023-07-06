@@ -15,10 +15,10 @@ datasource db {
 model User {
   id      String @id @default(uuid())
   clerkId String @unique
-  teams   Team[]
+  teams   UserTeam[]
 }
 
-model Team {
+model UserTeam {
   id     String  @id @default(uuid())
   name   String?
   userId String
@@ -26,3 +26,11 @@ model Team {
 
   @@index([userId])
 }
+
+// model Player {
+
+// }
+
+// model LeagueTeam {
+
+// }
