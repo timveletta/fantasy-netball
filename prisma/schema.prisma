@@ -19,7 +19,7 @@ model User {
 }
 
 model UserTeam {
-  id     String  @id @default(uuid())
+  id     String @id @default(uuid())
   name   String?
   userId String
   user   User    @relation(fields: [userId], references: [id])
@@ -27,10 +27,22 @@ model UserTeam {
   @@index([userId])
 }
 
-// model Player {
+model Player {
+  id     String  @id @default(uuid())
+  cdId  String  @unique
+  firstName String
+  lastName  String
+  position  String
+  teamId   String
+  team     Team    @relation(fields: [teamId], references: [id])
 
-// }
+  @@index([teamId])
+}
 
-// model LeagueTeam {
-
-// }
+model Team {
+  id    String @id @default(uuid())
+  cdId  String  @unique
+  competitionId String
+  name  String @unique
+  players Player[]
+}

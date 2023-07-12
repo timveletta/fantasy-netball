@@ -2,7 +2,7 @@
 import prisma from '@/lib/prisma';
 
 export async function addTeamToUser(teamName: string, userId: string) {
-	const team = await prisma.user.update({
+	return await prisma.user.update({
 		data: {
 			teams: {
 				create: [{ name: teamName }],
@@ -10,22 +10,29 @@ export async function addTeamToUser(teamName: string, userId: string) {
 		},
 		where: { id: userId },
 	});
-
-	return team;
 }
 
 export async function getTeamsByUserId(userId: string) {
-	const teams = await prisma.userTeam.findMany({
+	return await prisma.userTeam.findMany({
 		where: { userId },
 	});
+}
 
-	return teams;
+export async function getTeam(teamId: string) {
+	return await prisma.userTeam.findUniqueOrThrow({
+		where: { id: teamId },
+	});
+}
+
+export async function getPlayers() {
+	return await prisma.player.findMany({
+		where: { position: { not: '-' } },
+		include: { team: true },
+	});
 }
 
 export async function getUserByClerkId(clerkId: string) {
-	const user = await prisma.user.findUnique({
+	return await prisma.user.findUniqueOrThrow({
 		where: { clerkId },
 	});
-
-	return user;
 }

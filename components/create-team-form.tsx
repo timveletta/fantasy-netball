@@ -48,7 +48,11 @@ const CreateTeamForm = ({ userId }: CreateTeamFormProps) => {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				autoComplete="off"
+				className="space-y-6"
+			>
 				<FormField
 					control={form.control}
 					name="name"
