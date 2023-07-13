@@ -1,11 +1,11 @@
 import TeamTile from '@/components/team-tile';
-import { getTeamsByUserId, getUserByClerkId } from '@/lib/actions';
+import { getUserTeamsByUserId, getUserByClerkId } from '@/lib/actions';
 import { auth } from '@clerk/nextjs';
 
 export default async function Page() {
 	const { userId: clerkId } = auth();
 	const user = await getUserByClerkId(clerkId!);
-	const teams = await getTeamsByUserId(user?.id!);
+	const teams = await getUserTeamsByUserId(user?.id!);
 
 	return (
 		<div className="container py-8 flex flex-wrap">

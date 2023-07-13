@@ -12,7 +12,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { addTeamToUser } from '@/lib/actions';
+import { addUserTeamToUser } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 
 type CreateTeamFormProps = {
@@ -36,7 +36,7 @@ const CreateTeamForm = ({ userId }: CreateTeamFormProps) => {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			const team = await addTeamToUser(values.name, userId);
+			const team = await addUserTeamToUser(values.name, userId);
 
 			router.push(`/my-teams/${team.id}`);
 		} catch (error) {

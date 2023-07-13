@@ -5,7 +5,7 @@ import React from 'react';
 type PlayerListTileProps = Prisma.PlayerGetPayload<{
 	include: { team: true };
 }> & {
-	onClick(id: string): void;
+	onClick?(id: string): void;
 };
 
 const PlayerListTile = ({
@@ -20,7 +20,7 @@ const PlayerListTile = ({
 		<li
 			key={id}
 			className="flex items-center p-4 border-b gap-4 cursor-pointer hover:bg-slate-100"
-			onClick={() => onClick(id)}
+			onClick={() => onClick && onClick(id)}
 		>
 			<span className="text-slate-500 text-lg font-bold w-12">{position}</span>
 			<div className="flex flex-col">

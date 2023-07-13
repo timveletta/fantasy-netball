@@ -13,36 +13,38 @@ datasource db {
 }
 
 model User {
-  id      String @id @default(uuid())
-  clerkId String @unique
+  id      String     @id @default(uuid())
+  clerkId String     @unique
   teams   UserTeam[]
 }
 
 model UserTeam {
-  id     String @id @default(uuid())
-  name   String?
-  userId String
-  user   User    @relation(fields: [userId], references: [id])
+  id      String               @id @default(uuid())
+  name    String?
+  userId  String
+  user    User                 @relation(fields: [userId], references: [id])
+  players Player[]
 
   @@index([userId])
 }
 
 model Player {
-  id     String  @id @default(uuid())
-  cdId  String  @unique
+  id        String               @id @default(uuid())
+  cdId      String               @unique
   firstName String
   lastName  String
   position  String
-  teamId   String
-  team     Team    @relation(fields: [teamId], references: [id])
+  teamId    String
+  team      Team                 @relation(fields: [teamId], references: [id])
+  userTeams UserTeam[]
 
   @@index([teamId])
 }
 
 model Team {
-  id    String @id @default(uuid())
-  cdId  String  @unique
+  id            String   @id @default(uuid())
+  cdId          String   @unique
   competitionId String
-  name  String @unique
-  players Player[]
+  name          String   @unique
+  players       Player[]
 }
