@@ -3,6 +3,7 @@ import { Raleway } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { MainNav } from '@/components/main-nav';
 import { cn } from '@/utils';
+import PlausibleProvider from 'next-plausible';
 
 const raleway = Raleway({ subsets: ['latin'] });
 
@@ -18,12 +19,14 @@ export default function RootLayout({
 }) {
 	return (
 		<ClerkProvider>
-			<html lang="en">
-				<body className={cn(raleway.className, 'min-h-screen')}>
-					<MainNav />
-					<main>{children}</main>
-				</body>
-			</html>
+			<PlausibleProvider domain="fantasynetball.com">
+				<html lang="en">
+					<body className={cn(raleway.className, 'min-h-screen')}>
+						<MainNav />
+						<main>{children}</main>
+					</body>
+				</html>
+			</PlausibleProvider>
 		</ClerkProvider>
 	);
 }
