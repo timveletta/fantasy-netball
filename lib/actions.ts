@@ -34,6 +34,24 @@ export async function addPlayerToUserTeam(playerId: string, teamId: string) {
 	return result;
 }
 
+export async function removePlayerFromUserTeam(
+	playerId: string,
+	teamId: string
+) {
+	const result = await prisma.userTeam.update({
+		data: {
+			players: {
+				disconnect: [{ id: playerId }],
+			},
+		},
+		where: { id: teamId },
+	});
+
+	revalidateTag('userTeam');
+
+	return result;
+}
+
 export async function getUserTeam(teamId: string) {
 	return await prisma.userTeam.findUniqueOrThrow({
 		where: { id: teamId },

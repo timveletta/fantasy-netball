@@ -1,5 +1,6 @@
 import PlayerList from '@/components/player-list';
 import PlayerListTile from '@/components/player-list-tile';
+import UserTeamList from '@/components/user-team-list';
 import { getPlayers, getUserTeam } from '@/lib/actions';
 import React from 'react';
 
@@ -14,15 +15,8 @@ const Page = async ({ params }: { params: { teamId: string } }) => {
 	return (
 		<div className="container py-8">
 			<h1>Team {userTeam.name}</h1>
-			<div className="grid md:grid-cols-[1fr,400px]">
-				<div>
-					<h2>Players</h2>
-					<ul>
-						{userTeam.players.map((player) => (
-							<PlayerListTile key={player.id} {...player} />
-						))}
-					</ul>
-				</div>
+			<div className="grid md:grid-cols-[1fr,400px] gap-4">
+				<UserTeamList team={userTeam} />
 				<PlayerList players={availablePlayers} teamId={params.teamId} />
 			</div>
 		</div>

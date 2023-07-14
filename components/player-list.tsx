@@ -11,8 +11,7 @@ type PlayerListTileProps = {
 
 const PlayerList = ({ players, teamId }: PlayerListTileProps) => {
 	const onPlayerClicked = async (id: string) => {
-		const result = await addPlayerToUserTeam(id, teamId);
-		console.log(result);
+		await addPlayerToUserTeam(id, teamId);
 	};
 
 	return (
