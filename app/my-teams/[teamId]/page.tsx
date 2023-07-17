@@ -6,7 +6,9 @@ const Page = async ({ params }: { params: { teamId: string } }) => {
   const userTeam = await getUserTeam(params.teamId);
   const players = await getPlayers();
 
-  const availablePlayers = players.filter((player) => userTeam.players.every((p) => p.playerId !== player.id));
+  const availablePlayers = players
+    .filter((player) => userTeam.players.every((p) => p.playerId !== player.id))
+    .sort((a, b) => a.lastName.localeCompare(b.lastName));
 
   return (
     <div className="container py-8">
