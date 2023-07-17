@@ -139,6 +139,74 @@ export async function removePlayerFromUserTeam(playerId: string, teamId: string)
   return result;
 }
 
+export async function updatePlayerPositionInUserTeam(playerId: string, teamId: string, newPosition: Position) {
+  const userTeam = await getUserTeam(teamId);
+  const player = userTeam.players.find((p) => p.playerId === playerId);
+
+  if (!player) {
+    throw new Error("Player not found in team");
+  }
+
+  // team cannot have more than 3 players on the bench
+  if (
+    newPosition === Position.BENCH &&
+    userTeam.players.filter((p) => p.currentPosition === Position.BENCH).length + 1 > 3
+  ) {
+    throw new Error("Your team cannot have more than 3 players on the bench");
+  }
+
+  const currentPlayerInPosition =
+    newPosition === Position.BENCH ? undefined : userTeam.players.find((p) => p.currentPosition === newPosition);
+  const temporaryTeam = userTeam.players
+    .filter((p) => p.playerId !== playerId && p.playerId !== currentPlayerInPosition?.playerId)
+    .concat(currentPlayerInPosition ? [{ ...currentPlayerInPosition, currentPosition: player.currentPosition }] : [])
+    .concat([{ ...player, currentPosition: newPosition }]);
+
+  const isValid = checkTeamIsValid(temporaryTeam);
+
+  const result = await prisma.userTeam.update({
+    data: {
+      isValid,
+      players: {
+        update: [
+          {
+            where: {
+              userTeamId_playerId: {
+                playerId,
+                userTeamId: teamId,
+              },
+            },
+            data: {
+              currentPosition: newPosition,
+            },
+          },
+        ].concat(
+          currentPlayerInPosition
+            ? [
+                {
+                  where: {
+                    userTeamId_playerId: {
+                      playerId: currentPlayerInPosition.playerId,
+                      userTeamId: teamId,
+                    },
+                  },
+                  data: {
+                    currentPosition: player.currentPosition,
+                  },
+                },
+              ]
+            : []
+        ),
+      },
+    },
+    where: { id: teamId },
+  });
+
+  revalidateTag("userTeam");
+
+  return result;
+}
+
 export async function getUserTeam(teamId: string) {
   return await prisma.userTeam.findUniqueOrThrow({
     where: { id: teamId },

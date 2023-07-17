@@ -1,7 +1,8 @@
 "use client";
 import { Position, Prisma } from "@prisma/client";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { BarsArrowUpIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { Button } from "./ui/button";
 
 type UserTeamPlayerTileProps = {
   fixedPosition: Position;
@@ -9,9 +10,15 @@ type UserTeamPlayerTileProps = {
     include: { team: true };
   }>;
   onRemoveClicked(id: string): void;
+  onUpdatePlayerPosition?: (id: string, position: Position) => void;
 };
 
-const UserTeamPlayerTile = ({ player, fixedPosition, onRemoveClicked: onDeleteClicked }: UserTeamPlayerTileProps) => {
+const UserTeamPlayerTile = ({
+  player,
+  fixedPosition,
+  onRemoveClicked: onDeleteClicked,
+  onUpdatePlayerPosition,
+}: UserTeamPlayerTileProps) => {
   return (
     <div className="flex items-center p-4 gap-4">
       <span className="text-slate-500 text-lg font-bold w-12">
@@ -25,12 +32,14 @@ const UserTeamPlayerTile = ({ player, fixedPosition, onRemoveClicked: onDeleteCl
             </strong>
             <span className="text-slate-500 text-sm font-medium">{player.team.name}</span>
           </div>
-          <button
-            className="p-2 hover:bg-red-100 rounded-full text-slate-400 hover:text-red-800"
-            onClick={() => onDeleteClicked(player.id)}
-          >
-            <TrashIcon className="h-6 w-6 " />
-          </button>
+          {fixedPosition === Position.BENCH && onUpdatePlayerPosition && (
+            <Button size="icon" variant="default" onClick={() => onUpdatePlayerPosition(player.id, player.position)}>
+              <BarsArrowUpIcon className="h-6 w-6" />
+            </Button>
+          )}
+          <Button size="icon" variant="destructive" onClick={() => onDeleteClicked(player.id)}>
+            <TrashIcon className="h-6 w-6" />
+          </Button>
         </>
       )}
     </div>

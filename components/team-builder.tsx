@@ -1,8 +1,8 @@
 "use client";
 import PlayerList from "@/components/player-list";
 import UserTeamList from "@/components/user-team-list";
-import { addPlayerToUserTeam, removePlayerFromUserTeam } from "@/lib/actions";
-import { Prisma } from "@prisma/client";
+import { addPlayerToUserTeam, removePlayerFromUserTeam, updatePlayerPositionInUserTeam } from "@/lib/actions";
+import { Position, Prisma } from "@prisma/client";
 import React from "react";
 import IsTeamValidAlert from "./is-team-valid-alert";
 import ErrorAlert from "./error-alert";
@@ -30,6 +30,10 @@ const TeamBuilder = ({ userTeam, players }: TeamBuilderProps) => {
     await removePlayerFromUserTeam(id, userTeam.id);
   };
 
+  const onUpdatePlayerPosition = async (id: string, position: Position) => {
+    await updatePlayerPositionInUserTeam(id, userTeam.id, position);
+  };
+
   const isTeamFull = userTeam.players.length >= 10;
 
   return (
@@ -37,7 +41,11 @@ const TeamBuilder = ({ userTeam, players }: TeamBuilderProps) => {
       <div>
         <ErrorAlert message={error} />
         <IsTeamValidAlert isValid={userTeam.isValid} players={userTeam.players} />
-        <UserTeamList players={userTeam.players} onRemovePlayer={onRemovePlayer} />
+        <UserTeamList
+          players={userTeam.players}
+          onRemovePlayer={onRemovePlayer}
+          onUpdatePlayerPosition={onUpdatePlayerPosition}
+        />
       </div>
       <PlayerList players={players} onAddPlayer={onAddPlayer} isTeamFull={isTeamFull} />
     </div>

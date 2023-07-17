@@ -8,9 +8,10 @@ type UserTeamListProps = {
     include: { player: { include: { team: true } } };
   }>[];
   onRemovePlayer: (id: string) => void;
+  onUpdatePlayerPosition: (id: string, position: Position) => void;
 };
 
-const UserTeamList = ({ players, onRemovePlayer }: UserTeamListProps) => {
+const UserTeamList = ({ players, onRemovePlayer, onUpdatePlayerPosition }: UserTeamListProps) => {
   const findPlayerForPosition = React.useCallback(
     (position: Position) => {
       return players.filter((player) => player.currentPosition === position).map((player) => player.player);
@@ -60,26 +61,22 @@ const UserTeamList = ({ players, onRemovePlayer }: UserTeamListProps) => {
         fixedPosition={Position.BENCH}
         player={findPlayerForPosition(Position.BENCH)[0]}
         onRemoveClicked={onRemovePlayer}
+        onUpdatePlayerPosition={onUpdatePlayerPosition}
       />
       <UserTeamPlayerTile
         fixedPosition={Position.BENCH}
         player={findPlayerForPosition(Position.BENCH)[1]}
         onRemoveClicked={onRemovePlayer}
+        onUpdatePlayerPosition={onUpdatePlayerPosition}
       />
       <UserTeamPlayerTile
         fixedPosition={Position.BENCH}
         player={findPlayerForPosition(Position.BENCH)[2]}
         onRemoveClicked={onRemovePlayer}
+        onUpdatePlayerPosition={onUpdatePlayerPosition}
       />
     </>
   );
-  // return players.map((player) => (
-  // 	<UserTeamListTile
-  // 		key={player.id}
-  //
-  // 		{...player}
-  // 	/>
-  // ));
 };
 
 export default UserTeamList;
