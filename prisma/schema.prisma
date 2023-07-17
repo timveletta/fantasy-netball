@@ -12,6 +12,17 @@ datasource db {
   relationMode = "prisma"
 }
 
+enum Position {
+  GK
+  GD
+  WD
+  C
+  WA
+  GA
+  GS
+  BENCH
+}
+
 model User {
   id      String     @id @default(uuid())
   clerkId String     @unique
@@ -23,9 +34,24 @@ model UserTeam {
   name    String?
   userId  String
   user    User                 @relation(fields: [userId], references: [id])
-  players Player[]
+  players PlayersOnUserTeams[]
+
+  isValid         Boolean @default(false)
 
   @@index([userId])
+}
+
+model PlayersOnUserTeams {
+  userTeam    UserTeam                 @relation(fields: [userTeamId], references: [id])
+  userTeamId  String
+  player      Player                   @relation(fields: [playerId], references: [id])
+  playerId    String
+
+  currentPosition Position
+  addedAt  DateTime @default(now())
+
+  @@id([userTeamId, playerId])
+  @@index([userTeamId])
 }
 
 model Player {
@@ -33,10 +59,10 @@ model Player {
   cdId      String               @unique
   firstName String
   lastName  String
-  position  String
+  position  Position
   teamId    String
   team      Team                 @relation(fields: [teamId], references: [id])
-  userTeams UserTeam[]
+  userTeams PlayersOnUserTeams[]
 
   @@index([teamId])
 }

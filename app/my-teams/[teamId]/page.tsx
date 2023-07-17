@@ -1,26 +1,19 @@
-import PlayerList from '@/components/player-list';
-import PlayerListTile from '@/components/player-list-tile';
-import UserTeamList from '@/components/user-team-list';
-import { getPlayers, getUserTeam } from '@/lib/actions';
-import React from 'react';
+import TeamBuilder from "@/components/team-builder";
+import { getPlayers, getUserTeam } from "@/lib/actions";
+import React from "react";
 
 const Page = async ({ params }: { params: { teamId: string } }) => {
-	const userTeam = await getUserTeam(params.teamId);
-	const players = await getPlayers();
+  const userTeam = await getUserTeam(params.teamId);
+  const players = await getPlayers();
 
-	const availablePlayers = players.filter((player) =>
-		userTeam.players.every((p) => p.id !== player.id)
-	);
+  const availablePlayers = players.filter((player) => userTeam.players.every((p) => p.playerId !== player.id));
 
-	return (
-		<div className="container py-8">
-			<h1>Team {userTeam.name}</h1>
-			<div className="grid md:grid-cols-[1fr,400px] gap-4">
-				<UserTeamList team={userTeam} />
-				<PlayerList players={availablePlayers} teamId={params.teamId} />
-			</div>
-		</div>
-	);
+  return (
+    <div className="container py-8">
+      <h1>Team {userTeam.name}</h1>
+      <TeamBuilder userTeam={userTeam} players={availablePlayers} />
+    </div>
+  );
 };
 
 export default Page;

@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient, Position } from '@prisma/client';
 import fetch from 'node-fetch';
 
 const prisma = new PrismaClient();
@@ -85,19 +85,31 @@ async function main() {
 			console.log('Created team: ', result.id, result.name);
 		}
 
-		for (let { teamId, position, ...player } of players.values()) {
+		for (let { teamId, position: cdPosition, ...player } of players.values()) {
+			const position: Position =
+				cdPosition in Position ? (cdPosition as Position) : Position.BENCH;
+
 			prisma.player
 				.upsert({
 					where: { cdId: player.cdId },
-					update: { ...player, team: { connect: { cdId: teamId } } },
-					create: { ...player, position, team: { connect: { cdId: teamId } } },
+					update: {
+						...player,
+						position,
+						team: { connect: { cdId: teamId } },
+					},
+					create: {
+						...player,
+						position,
+						team: { connect: { cdId: teamId } },
+					},
 				})
 				.then((result) => {
 					console.log(
 						'Created player: ',
 						result.id,
 						result.firstName,
-						result.lastName
+						result.lastName,
+						result.position
 					);
 				});
 		}

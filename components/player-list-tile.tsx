@@ -1,4 +1,5 @@
 'use client';
+import { cn } from '@/utils';
 import { Prisma } from '@prisma/client';
 import React from 'react';
 
@@ -6,6 +7,7 @@ type PlayerListTileProps = Prisma.PlayerGetPayload<{
 	include: { team: true };
 }> & {
 	onClick(id: string): void;
+	disabled?: boolean;
 };
 
 const PlayerListTile = ({
@@ -15,11 +17,16 @@ const PlayerListTile = ({
 	position,
 	team,
 	onClick,
+	disabled = false,
 }: PlayerListTileProps) => {
 	return (
 		<li
-			className="flex items-center p-4 border-b gap-4 cursor-pointer hover:bg-slate-100"
-			onClick={() => onClick(id)}
+			className={cn(
+				'flex items-center p-4 border-b gap-4 ',
+				disabled && 'opacity-50',
+				!disabled && 'cursor-pointer hover:bg-slate-100'
+			)}
+			onClick={() => !disabled && onClick(id)}
 		>
 			<span className="text-slate-500 text-lg font-bold w-12">{position}</span>
 			<div className="flex flex-col">

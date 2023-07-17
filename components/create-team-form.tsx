@@ -36,9 +36,12 @@ const CreateTeamForm = ({ userId }: CreateTeamFormProps) => {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			const team = await addUserTeamToUser(values.name, userId);
-
-			router.push(`/my-teams/${team.id}`);
+			const { teams } = await addUserTeamToUser(values.name, userId);
+			if (teams[0]) {
+				router.push(`/my-teams/${teams[0].id}`);
+			} else {
+				throw new Error('Team failed to create, please try again later.');
+			}
 		} catch (error) {
 			form.setError('root', {
 				message: 'An error occurred, please try again later.',
