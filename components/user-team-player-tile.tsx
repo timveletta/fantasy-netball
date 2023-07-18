@@ -20,7 +20,7 @@ const UserTeamPlayerTile = ({
   onUpdatePlayerPosition,
 }: UserTeamPlayerTileProps) => {
   return (
-    <div className="flex items-center p-4 gap-4">
+    <div className="flex items-center p-4 gap-1">
       <span className="text-slate-500 text-lg font-bold w-12">
         {fixedPosition === Position.BENCH ? player?.position : fixedPosition}
       </span>

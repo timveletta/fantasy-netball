@@ -13,9 +13,23 @@ type PlayerListTileProps = {
 const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) => {
   const [selectedPosition, setSelectedPosition] = React.useState<"ALL" | Position>("ALL");
 
+  const onTabChange = (value: string) => {
+    if (value === "ALL" || value in Position) {
+      setSelectedPosition(value as "ALL" | Position);
+    }
+  };
+
+  const filteredPlayers = React.useMemo(() => {
+    if (selectedPosition === "ALL") {
+      return players;
+    }
+
+    return players.filter((player) => player.position === selectedPosition);
+  }, [players, selectedPosition]);
+
   return (
     <div className="border-2 border-slate-400 rounded-lg">
-      <Tabs value={selectedPosition} onValueChange={setSelectedPosition} className="w-full">
+      <Tabs value={selectedPosition} onValueChange={onTabChange} className="w-full">
         <TabsList>
           <TabsTrigger value="ALL">ALL</TabsTrigger>
           <TabsTrigger value={Position.GK}>GK</TabsTrigger>
@@ -28,7 +42,7 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
         </TabsList>
       </Tabs>
       <ul className="md:overflow-y-scroll md:max-h-[calc(100vh-16rem)] ">
-        {players.map((player) => (
+        {filteredPlayers.map((player) => (
           <PlayerListTile key={player.id} onClick={onAddPlayer} disabled={isTeamFull} {...player} />
         ))}
       </ul>
