@@ -24,8 +24,8 @@ const Page = () => {
       <Text.Body>
         We use analytical cookies to understand how visitors interact with our website. These cookies collect
         non-personal information and help us analyze user behavior, such as the number of visitors, pages viewed, and
-        time spent on each page. The insights obtained from these cookies allow us to improve the website's performance
-        and content.
+        time spent on each page. The insights obtained from these cookies allow us to improve the website&apos;s
+        performance and content.
       </Text.Body>
       <Text.Subheader>2.3 Functional Cookies</Text.Subheader>
       <Text.Body>
@@ -54,8 +54,8 @@ const Page = () => {
       <Text.Header>5. Changes to the Cookie Policy</Text.Header>
       <Text.Body>
         We may update this Cookie Policy from time to time to reflect changes in our use of cookies and related
-        practices. When we make significant changes to this policy, we will update the "Last Updated" date at the
-        beginning of the policy. We recommend reviewing this policy periodically to stay informed about our use of
+        practices. When we make significant changes to this policy, we will update the &quot;Last Updated&quot; date at
+        the beginning of the policy. We recommend reviewing this policy periodically to stay informed about our use of
         cookies.
       </Text.Body>
       <Text.Header>6. Contact Us</Text.Header>

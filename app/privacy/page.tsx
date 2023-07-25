@@ -62,7 +62,7 @@ const Page = () => {
         misuse, or alteration. However, please understand that no method of transmission over the internet or electronic
         storage is entirely secure, and we cannot guarantee absolute security.
       </Text.Body>
-      <Text.Header>5. Children's Privacy</Text.Header>
+      <Text.Header>5. Children&apos;s Privacy</Text.Header>
       <Text.Body>
         FantasyNetball.com does not knowingly collect or solicit personal information from individuals under the age of
         13. If you believe we have collected personal information from a child under 13, please contact us immediately,
