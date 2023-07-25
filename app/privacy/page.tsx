@@ -1,5 +1,6 @@
 import React from "react";
 import Text from "@/components/text";
+import Link from "next/link";
 
 const Page = () => {
   return (
@@ -32,7 +33,11 @@ const Page = () => {
         We use cookies and similar technologies to enhance user experience and gather information about your
         interactions with FantasyNetball.com. Cookies are small files stored on your device that help us recognize your
         preferences and remember certain information for future visits. By using the website, you agree to the use of
-        cookies as described in our [Cookie Policy](https://chat.openai.com/#).
+        cookies as described in our{" "}
+        <Link className="underline text-blue-600 hover:text-blue-800 visited:text-purple-800" href="/cookies">
+          Cookie Policy
+        </Link>
+        .
       </Text.Body>
       <Text.Header>3. Data Sharing and Disclosure</Text.Header>
       <Text.Subheader>3.1 Third-Party Service Providers</Text.Subheader>
