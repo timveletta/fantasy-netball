@@ -8,12 +8,12 @@ const Hero = () => {
   return (
     <div className="relative">
       <div className="container lg:grid lg:grid-cols-12 lg:gap-x-12 lg:px-8">
-        <div className="px-6 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
+        <div className="pb-16 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <Text.Title>
               Unleash your inner coach.<span className="block text-primary">Build your dream netball team.</span>
             </Text.Title>
-            <p className="my-6 text-lg text-gray-600 text-justify max-w-lg leading-relaxed">
+            <p className="my-6 md:text-lg text-gray-600 text-justify max-w-lg leading-relaxed">
               Join the ultimate Fantasy Netball experience and immerse yourself in the thrill of building your team and
               competing against your friends.
             </p>
@@ -22,7 +22,7 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-        <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+        <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0 -mx-8">
           <Image
             src="/heroimage.png"
             alt="Hero image - Thunderbirds win 2023 championship"
