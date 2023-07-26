@@ -2,6 +2,7 @@ import Link, { LinkProps } from "next/link";
 
 import { cn } from "@/utils";
 import { UserButton, auth } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 const NavLink = ({ className, ...props }: LinkProps & React.HTMLAttributes<HTMLElement>) => {
   return <Link className={cn("text-sm font-medium transition-colors hover:text-primary", className)} {...props}></Link>;
@@ -14,18 +15,22 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
 
   return (
     <nav className={cn("py-4 border-b border-gray-300", className)} {...props}>
-      <div className="flex  justify-between container">
+      <div className="flex items-center justify-between container">
         <div>
           <Link href="/" className="text-primary">
             Fantasy Netball
           </Link>
         </div>
-        <div className="flex space-x-4 lg:space-x-6">
+        <div className="flex space-x-4 items-center">
           {isLoggedIn && <NavLink href="/my-teams">My Teams</NavLink>}
           {!isLoggedIn && (
             <>
-              <NavLink href="/sign-in">Login</NavLink>
-              <NavLink href="/sign-up">Register</NavLink>
+              <Button asChild variant="outline">
+                <Link href="/sign-in">Login</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/sign-up">Register</Link>
+              </Button>
             </>
           )}
           <UserButton afterSignOutUrl="/" />
