@@ -17,8 +17,8 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
         FantasyNetball.com is still being developed so this might happen from time to time.
       </Text.Subheader>
       <Text.Body className="max-w-lg">
-        Don't worry though, the developer has been notified and will look into it right after they find a fill in for
-        their social netball team.
+        Don&apos;t worry though, the developer has been notified and will look into it right after they find a fill in
+        for their social netball team.
       </Text.Body>
       <div className="mt-4 space-x-2">
         <Button onClick={() => reset()}>Try again</Button>
