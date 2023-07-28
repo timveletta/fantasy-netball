@@ -14,7 +14,7 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
   const isLoggedIn = !!userId;
 
   return (
-    <nav className={cn("py-4 border-b border-gray-300", className)} {...props}>
+    <nav className={cn("py-4", className)} {...props}>
       <div className="flex items-center justify-between container">
         <div>
           <Link href="/" className="text-primary">
