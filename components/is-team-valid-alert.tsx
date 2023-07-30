@@ -25,6 +25,10 @@ const IsTeamValidAlert = ({ isValid, players }: IsTeamValidAlertProps) => {
     return Object.keys(teamGroups).find((teamKey) => teamGroups[teamKey].length > 3);
   }, [players]);
 
+  const isTooExpensive = React.useMemo(() => {
+    return players.reduce((acc, curr) => acc + curr.player.price, 0) > 750000;
+  }, [players]);
+
   return (
     <Alert>
       <AlertDescription>
@@ -37,6 +41,7 @@ const IsTeamValidAlert = ({ isValid, players }: IsTeamValidAlertProps) => {
           {hasTooManyPlayersFromOneTeam && (
             <li>You have too many players from the {hasTooManyPlayersFromOneTeam} on your team.</li>
           )}
+          {isTooExpensive && <li>Your team is exceeding the salary cap.</li>}
         </ul>
       </AlertDescription>
     </Alert>

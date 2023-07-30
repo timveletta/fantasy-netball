@@ -32,6 +32,7 @@ const UserTeamPlayerTile = ({
             </strong>
             <span className="text-slate-500 text-sm font-medium">{player.team.name}</span>
           </div>
+          <span className="font-bold text-slate-700 mr-8">${player.price.toLocaleString()}</span>
           {fixedPosition === Position.BENCH && onUpdatePlayerPosition && (
             <Button size="icon" variant="default" onClick={() => onUpdatePlayerPosition(player.id, player.position)}>
               <BarsArrowUpIcon className="h-6 w-6" />

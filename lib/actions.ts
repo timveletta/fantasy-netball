@@ -50,6 +50,11 @@ function checkTeamIsValid(
     isValid = false;
   }
 
+  // team is not worth more than $750,000
+  if (currentPlayers.reduce((acc, p) => acc + p.player.price, 0) + (playerToBeAdded?.price || 0) > 750000) {
+    isValid = false;
+  }
+
   // at least 1 player in each position
   const teamPositions = currentPlayers
     .map((p) => p.currentPosition)
