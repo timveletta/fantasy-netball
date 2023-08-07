@@ -3,6 +3,7 @@ import { Position, Prisma } from "@prisma/client";
 import React from "react";
 import PlayerListTile from "./player-list-tile";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
+import { Input } from "./ui/input";
 
 type PlayerListTileProps = {
   players: Prisma.PlayerGetPayload<{ include: { team: true } }>[];
@@ -28,8 +29,9 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
   }, [players, selectedPosition]);
 
   return (
-    <div className="border-2 border-slate-400 rounded-lg">
-      <Tabs value={selectedPosition} onValueChange={onTabChange} className="w-full">
+    <div className="">
+      <Input placeholder="Search" />
+      <Tabs value={selectedPosition} onValueChange={onTabChange}>
         <TabsList>
           <TabsTrigger value="ALL">ALL</TabsTrigger>
           <TabsTrigger value={Position.GK}>GK</TabsTrigger>
@@ -41,7 +43,7 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
           <TabsTrigger value={Position.GS}>GS</TabsTrigger>
         </TabsList>
       </Tabs>
-      <ul className="md:overflow-y-scroll md:max-h-[calc(100vh-16rem)] ">
+      <ul className="flex flex-col gap-y-2">
         {filteredPlayers.map((player) => (
           <PlayerListTile key={player.id} onClick={onAddPlayer} disabled={isTeamFull} {...player} />
         ))}

@@ -2,6 +2,9 @@
 import { cn } from "@/utils";
 import { Prisma } from "@prisma/client";
 import React from "react";
+import Price from "./price";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { IconButton } from "./ui/icon-button";
 
 type PlayerListTileProps = Prisma.PlayerGetPayload<{
   include: { team: true };
@@ -23,20 +26,28 @@ const PlayerListTile = ({
   return (
     <li
       className={cn(
-        "flex items-center p-4 border-b gap-4 ",
+        "flex items-center p-4 border-b gap-4 bg-white rounded-lg",
         disabled && "opacity-50",
-        !disabled && "cursor-pointer hover:bg-slate-100"
+        !disabled && "cursor-pointer hover:bg-slate-100 hover:drop-shadow"
       )}
-      onClick={() => !disabled && onClick(id)}
     >
-      <span className="text-slate-500 text-lg font-bold w-12">{position}</span>
+      <div className="h-12 w-12 bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
       <div className="flex flex-col mr-auto">
-        <strong className="text-slate-900 text-sm font-medium">
+        <strong className="font-bold">
           {lastName}, {firstName}
         </strong>
-        <span className="text-slate-500 text-sm font-medium">{team.name}</span>
+        <span className="text-sm font-medium">{position}</span>
       </div>
-      <span className="font-bold text-slate-700">${price.toLocaleString()}</span>
+      <div className="flex flex-col">
+        <span className="font-bold opacity-80">
+          <Price price={price} />
+        </span>
+      </div>
+      <div>
+        <IconButton size="sm" onClick={() => !disabled && onClick(id)}>
+          <PlusIcon className="h-6 w-6" />
+        </IconButton>
+      </div>
     </li>
   );
 };

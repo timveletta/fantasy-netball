@@ -6,6 +6,10 @@ import { Position, Prisma } from "@prisma/client";
 import React from "react";
 import IsTeamValidAlert from "./is-team-valid-alert";
 import ErrorAlert from "./error-alert";
+import NetballCourt from "./netball-court";
+import Text from "@/components/text";
+import LabelValue from "./label-value";
+import TeamBottomToolbar from "./team-bottom-toolbar";
 
 type TeamBuilderProps = {
   userTeam: Prisma.UserTeamGetPayload<{
@@ -35,20 +39,24 @@ const TeamBuilder = ({ userTeam, players }: TeamBuilderProps) => {
   };
 
   const isTeamFull = userTeam.players.length >= 10;
+  const remainingBudget = 750000 - userTeam.players.reduce((acc, player) => acc + player.player.price, 0);
 
   return (
-    <div className="grid md:grid-cols-[1fr,400px] gap-4">
-      <div>
-        <ErrorAlert message={error} />
-        <IsTeamValidAlert isValid={userTeam.isValid} players={userTeam.players} />
+    <>
+      <div className="grid lg:grid-cols-[600px,1fr] xl:grid-cols-[700px,1fr] lg:gap-8 gap-4">
         <UserTeamList
           players={userTeam.players}
           onRemovePlayer={onRemovePlayer}
           onUpdatePlayerPosition={onUpdatePlayerPosition}
         />
+        <PlayerList players={players} onAddPlayer={onAddPlayer} isTeamFull={isTeamFull} />
       </div>
-      <PlayerList players={players} onAddPlayer={onAddPlayer} isTeamFull={isTeamFull} />
-    </div>
+      <TeamBottomToolbar
+        teamName={userTeam.name}
+        numPlayers={userTeam.players.length}
+        remainingBudget={remainingBudget}
+      />
+    </>
   );
 };
 
