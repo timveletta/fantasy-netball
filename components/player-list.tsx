@@ -12,10 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 
 const formSchema = z.object({
   searchTerm: z.string(),
-  sort: z
-    .string()
-    .or(z.enum(["name", "team", "priceAsc", "priceDsc"]))
-    .optional(),
+  sort: z.enum(["name", "priceAsc", "priceDsc"]).optional(),
 });
 
 type PlayerListTileProps = {
@@ -50,8 +47,6 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
       .sort((a, b) =>
         watchSort === "name"
           ? `${a.lastName},${a.firstName}`.localeCompare(`${b.lastName},${b.firstName}`)
-          : watchSort === "team"
-          ? a.team.name.localeCompare(b.team.name)
           : watchSort === "priceAsc"
           ? a.price - b.price
           : watchSort === "priceDsc"
@@ -94,7 +89,10 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
               name="sort"
               render={({ field }) => (
                 <FormItem className="flex-1 min-w-[128px] xl:max-w-[192px]">
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={(value: "name" | "priceAsc" | "priceDsc") => field.onChange(value)}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Sort" />
@@ -102,7 +100,6 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="name">Name</SelectItem>
-                      <SelectItem value="team">Team</SelectItem>
                       <SelectItem value="priceAsc">Price - Ascending</SelectItem>
                       <SelectItem value="priceDsc">Price - Descending</SelectItem>
                     </SelectContent>

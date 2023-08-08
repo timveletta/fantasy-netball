@@ -43,7 +43,7 @@ const TeamBuilder = ({ userTeam, players }: TeamBuilderProps) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-[600px,1fr] xl:grid-cols-[700px,1fr] lg:gap-4 gap-2">
+      <div className="grid lg:grid-cols-[600px,1fr] xl:grid-cols-[700px,1fr] lg:gap-8 md:gap-4 gap-2">
         <UserTeamList
           players={userTeam.players}
           onRemovePlayer={onRemovePlayer}
