@@ -47,6 +47,7 @@ const UserTeamPlayerTile = ({
               <IconButton
                 className="hidden sm:inline-flex"
                 size="sm"
+                variant="outline"
                 onClick={() => onUpdatePlayerPosition(player.id, player.position)}
               >
                 <ArrowsUpDownIcon className="h-6 w-6" />

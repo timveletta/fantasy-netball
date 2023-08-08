@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
           <body className={cn(raleway.className, "min-h-screen flex flex-col")}>
             <MainNav />
-            <main className="mb-auto">{children}</main>
+            <main className="mb-auto overflow-x-clip">{children}</main>
             <Footer />
           </body>
         </html>
