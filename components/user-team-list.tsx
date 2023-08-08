@@ -22,7 +22,7 @@ const UserTeamList = ({ players, onRemovePlayer, onUpdatePlayerPosition }: UserT
 
   return (
     <div>
-      <div className="bg-secondary p-8 rounded-xl flex flex-col gap-y-4 mb-4">
+      <div className="bg-secondary md:p-8 px-2 py-4 md:rounded-xl flex flex-col gap-y-4 mb-4">
         <UserTeamPlayerTile
           fixedPosition={Position.GK}
           player={findPlayerForPosition(Position.GK)[0]}
@@ -59,7 +59,7 @@ const UserTeamList = ({ players, onRemovePlayer, onUpdatePlayerPosition }: UserT
           onRemoveClicked={onRemovePlayer}
         />
       </div>
-      <div className="bg-secondary p-8 rounded-xl flex flex-col gap-y-4">
+      <div className="bg-secondary md:p-8 px-2 py-4 md:rounded-xl flex flex-col gap-y-4 mb-4">
         <UserTeamPlayerTile
           fixedPosition={Position.BENCH}
           player={findPlayerForPosition(Position.BENCH)[0]}

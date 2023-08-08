@@ -20,8 +20,10 @@ const TeamBottomToolbar = ({ teamName, numPlayers, remainingBudget }: TeamBottom
             <sub className="opacity-80">/10</sub>
           </LabelValue>
           |
-          <LabelValue label="Remaining Budget">
-            <Price price={remainingBudget} />
+          <LabelValue label="Budget">
+            <div className="w-full text-right">
+              <Price price={remainingBudget} />
+            </div>
           </LabelValue>
         </div>
       </div>

@@ -31,9 +31,9 @@ const PlayerListTile = ({
         !disabled && "cursor-pointer hover:bg-slate-100 hover:drop-shadow"
       )}
     >
-      <div className="h-12 w-12 bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
+      <div className="h-10 w-10 aspect-square bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
       <div className="flex flex-col mr-auto">
-        <strong className="font-bold">
+        <strong className="font-bold line-clamp-1">
           {lastName}, {firstName}
         </strong>
         <span className="text-sm font-medium">{position}</span>

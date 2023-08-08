@@ -32,9 +32,9 @@ const UserTeamPlayerTile = ({
     >
       {player ? (
         <>
-          <div className="h-12 w-12 bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
+          <div className="h-10 w-10 aspect-square bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
           <div className="flex flex-col mr-auto">
-            <strong className="text-primary-foreground text-lg font-bold">
+            <strong className="text-primary-foreground md:text-lg font-bold line-clamp-1">
               {player.lastName}, {player.firstName}
             </strong>
             <span className="text-primary-foreground text-sm font-medium">{player.position}</span>
@@ -44,10 +44,19 @@ const UserTeamPlayerTile = ({
           </span>
           {fixedPosition === Position.BENCH && onUpdatePlayerPosition && (
             <>
-              <IconButton size="sm" onClick={() => onUpdatePlayerPosition(player.id, player.position)}>
+              <IconButton
+                className="hidden sm:inline-flex"
+                size="sm"
+                onClick={() => onUpdatePlayerPosition(player.id, player.position)}
+              >
                 <ArrowsUpDownIcon className="h-6 w-6" />
               </IconButton>
-              <IconButton variant="destructive" size="sm" onClick={() => onDeleteClicked(player.id)}>
+              <IconButton
+                className="hidden sm:inline-flex"
+                variant="destructive"
+                size="sm"
+                onClick={() => onDeleteClicked(player.id)}
+              >
                 <MinusIcon className="h-6 w-6" />
               </IconButton>
             </>

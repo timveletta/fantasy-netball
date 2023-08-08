@@ -10,7 +10,7 @@ const Text = {
     <h2 className={cn("text-2xl font-bold", className)}>{children}</h2>
   ),
   Subheader: ({ children, className }: React.HTMLAttributes<HTMLElement>) => (
-    <h3 className={cn("text-lg font-bold", className)}>{children}</h3>
+    <h3 className={cn("md:text-lg font-bold", className)}>{children}</h3>
   ),
   Body: ({ children, className }: React.HTMLAttributes<HTMLElement>) => (
     <p className={cn("mb-2", className)}>{children}</p>

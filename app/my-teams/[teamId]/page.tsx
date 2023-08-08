@@ -11,7 +11,7 @@ const Page = async ({ params }: { params: { teamId: string } }) => {
     .sort((a, b) => a.lastName.localeCompare(b.lastName));
 
   return (
-    <div className="container py-8">
+    <div className="md:container py-8">
       <TeamBuilder userTeam={userTeam} players={availablePlayers} />
     </div>
   );
