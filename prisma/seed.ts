@@ -7,8 +7,10 @@ type Match = {
   matchId: string;
   homeSquadId: number;
   homeSquadName: string;
+  homeSquadShortCode: string;
   awaySquadId: number;
   awaySquadName: string;
+  awaySquadShortCode: string;
 };
 
 type Fixture = {
@@ -59,6 +61,7 @@ async function main() {
         {
           cdId: match.homeSquadId.toString(),
           name: match.homeSquadName,
+          shortCode: match.homeSquadShortCode,
           competitionId,
         },
       ])
@@ -158,7 +161,6 @@ async function fetchMatchStats(competitionId: string, matchId: string): Promise<
 }
 
 function calculatePointsForMatch(stats: PlayerMatchStats, positionCode: string) {
-  console.log(stats);
   return (
     stats.goals * 2 +
     stats.goalMisses * -5 +

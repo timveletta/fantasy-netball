@@ -1,3 +1,4 @@
+import { Position } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -24,4 +25,25 @@ export function retry<T>(fn: () => Promise<T>, retries: number = 5): Promise<T> 
 
 export function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function formatPosition(position: Position) {
+  switch (position) {
+    case Position.GK:
+      return "Goal Keeper";
+    case Position.GD:
+      return "Goal Defence";
+    case Position.WD:
+      return "Wing Defence";
+    case Position.C:
+      return "Center";
+    case Position.WA:
+      return "Wing Attack";
+    case Position.GA:
+      return "Goal Attack";
+    case Position.GS:
+      return "Goal Shooter";
+    case Position.BENCH:
+      return "-";
+  }
 }

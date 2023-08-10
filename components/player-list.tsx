@@ -57,7 +57,7 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
 
   return (
     <Form {...form}>
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
         <div className="flex flex-col gap-y-4 px-2 sm:px-0">
           <FormField
             control={form.control}

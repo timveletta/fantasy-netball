@@ -1,10 +1,11 @@
 "use client";
-import { cn } from "@/utils";
+import { cn, formatPosition } from "@/utils";
 import { Prisma } from "@prisma/client";
 import React from "react";
 import Price from "./price";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "./ui/icon-button";
+import Image from "next/image";
 
 type PlayerListTileProps = Prisma.PlayerGetPayload<{
   include: { team: true };
@@ -31,12 +32,16 @@ const PlayerListTile = ({
         !disabled && "cursor-pointer hover:bg-slate-100 hover:drop-shadow"
       )}
     >
-      <div className="h-10 w-10 aspect-square bg-gray-300 rounded-full">{/* placeholder for team image */}</div>
+      {team.logoUrl ? (
+        <Image alt="Team Logo" width={40} height={40} src={team.logoUrl} className="h-12 w-12 aspect-square" />
+      ) : (
+        <div className="h-12 w-12 aspect-square rounded-full bg-background" />
+      )}
       <div className="flex flex-col mr-auto">
         <strong className="font-bold line-clamp-1">
           {lastName}, {firstName}
         </strong>
-        <span className="text-sm font-medium">{position}</span>
+        <span className="text-sm font-medium">{formatPosition(position)}</span>
       </div>
       <div className="flex flex-col">
         <span className="font-bold opacity-80">
