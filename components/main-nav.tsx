@@ -3,6 +3,7 @@ import Link, { LinkProps } from "next/link";
 import { cn } from "@/utils";
 import { UserButton, auth } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 const NavLink = ({ className, ...props }: LinkProps & React.HTMLAttributes<HTMLElement>) => {
   return <Link className={cn("text-sm font-medium transition-colors hover:text-primary", className)} {...props}></Link>;
@@ -18,7 +19,7 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
       <div className="flex items-center justify-between container">
         <div>
           <Link href="/" className="text-primary">
-            Fantasy Netball
+            <Image src="/logo.png" width={64} height={64} alt="Logo" />
           </Link>
         </div>
         <div className="flex space-x-4 items-center">
