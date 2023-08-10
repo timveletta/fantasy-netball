@@ -1,5 +1,6 @@
 "use server";
 import prisma from "@/lib/prisma";
+import { retry } from "@/utils";
 import { Position, Prisma } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 
@@ -236,4 +237,8 @@ export async function getUserByClerkId(clerkId: string) {
   return await prisma.user.findUniqueOrThrow({
     where: { clerkId },
   });
+}
+
+export async function pollForUserCreatedByClerkId(clerkId: string) {
+  return await retry(() => getUserByClerkId(clerkId));
 }
