@@ -4,7 +4,7 @@ import UserTeamList from "@/components/user-team-list";
 import { addPlayerToUserTeam, removePlayerFromUserTeam, updatePlayerPositionInUserTeam } from "@/lib/actions";
 import { Position, Prisma } from "@prisma/client";
 import React from "react";
-import IsTeamValidAlert from "./is-team-valid-alert";
+import IsTeamValidPopover from "./is-team-valid-popover";
 import ErrorAlert from "./error-alert";
 import NetballCourt from "./netball-court";
 import Text from "@/components/text";

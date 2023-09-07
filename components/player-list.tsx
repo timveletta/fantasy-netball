@@ -108,7 +108,7 @@ const PlayerList = ({ players, onAddPlayer, isTeamFull }: PlayerListTileProps) =
               )}
             />
           </div>
-          <ul className="flex flex-col gap-y-2">
+          <ul className="flex flex-col gap-y-2 lg:max-h-[960px] overflow-y-scroll">
             {filteredPlayers.map((player) => (
               <PlayerListTile key={player.id} onClick={onAddPlayer} disabled={isTeamFull} {...player} />
             ))}
