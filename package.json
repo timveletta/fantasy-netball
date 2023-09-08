@@ -48,6 +48,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.37.1",
     "@types/node": "^20.4.1",
     "prisma": "^5.0.0",
     "ts-node": "^10.9.1",
