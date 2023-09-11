@@ -41,6 +41,3 @@ next-env.d.ts
 .sentryclirc
 
 data.csv
-/test-results/
-/playwright-report/
-/playwright/.cache/
