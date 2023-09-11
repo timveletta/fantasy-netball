@@ -3,8 +3,6 @@ import Text from "@/components/text";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import IsPreRelease from "./is-pre-release";
-import WaitlistForm from "./waitlist-form";
 
 const Hero = () => {
   return (
@@ -19,11 +17,9 @@ const Hero = () => {
               Join the ultimate Fantasy Netball experience and immerse yourself in the thrill of building your team and
               competing against your friends.
             </p>
-            <IsPreRelease fallback={<WaitlistForm />}>
-              <Button asChild size="lg">
-                <Link href="/sign-up">Join now!</Link>
-              </Button>
-            </IsPreRelease>
+            <Button asChild size="lg">
+              <Link href="/sign-up">Join now!</Link>
+            </Button>
           </div>
         </div>
         <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0 -mx-8">

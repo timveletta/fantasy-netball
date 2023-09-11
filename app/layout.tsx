@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Raleway } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import { MainNav } from "@/components/main-nav";
 import { cn } from "@/utils";
 import PlausibleProvider from "next-plausible";
@@ -14,14 +15,16 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PlausibleProvider domain="fantasynetball.com">
-      <html lang="en">
-        <body className={cn(raleway.className, "min-h-screen flex flex-col")}>
-          <MainNav />
-          <main className="mb-auto overflow-x-clip">{children}</main>
-          <Footer />
-        </body>
-      </html>
-    </PlausibleProvider>
+    <ClerkProvider>
+      <PlausibleProvider domain="fantasynetball.com">
+        <html lang="en">
+          <body className={cn(raleway.className, "min-h-screen flex flex-col")}>
+            <MainNav />
+            <main className="mb-auto overflow-x-clip">{children}</main>
+            <Footer />
+          </body>
+        </html>
+      </PlausibleProvider>
+    </ClerkProvider>
   );
 }
